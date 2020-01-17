@@ -1,0 +1,18 @@
+{
+	"games": "Mängud",
+	"stats": "Statistika",
+	"history": "Ajalugu",
+	"language": "Keel",
+	"jyly" : "Putiliiga",
+	"jyly.description" : "20 x 5 putti distantsidelt vahemikus 5m - 10m.",
+	"fifty" : "50",
+	"fifty.description" : "50 putti 5m pealt.",
+	"ladder" : "Redel",
+	"ladder.description": "Alustad 5m pealt ning mängid kuni 10m pealt saad kolm putti sisse.",
+	"no-games": "Ühtegi mängu pole veel mängitud",
+	"back": "Tagasi",
+	"newGame": "Uus mäng",
+	"delete": "Kustuta",
+	"undo": "Tühista",
+	"gameDeleted": "Mäng kustutatud."
+}

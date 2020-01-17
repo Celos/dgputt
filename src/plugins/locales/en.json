@@ -1,0 +1,18 @@
+{
+	"games": "Games",
+	"stats": "Stats",
+	"history": "History",
+	"language": "Language",
+	"jyly" : "Jyly",
+	"jyly.description" : "Play 20 rounds of 5 putts each from varying distances.",
+	"fifty" : "50",
+	"fifty.description" : "Throw 50 putts from 5m.",
+	"ladder" : "Ladder",
+	"ladder.description": "Start from 5m and play until you make 3 putts from 10m.",
+	"no-games": "No games played yet",
+	"back": "Back",
+	"newGame": "New game",
+	"delete": "Delete",
+	"undo": "Undo",
+	"gameDeleted": "Game deleted."
+}
