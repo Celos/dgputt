@@ -5,3 +5,4 @@ export const ADD_ROUND = "ADD_ROUND";
 export const DELETE_ROUND = "DELETE_ROUND";
 export const SET_THEME = "SET_THEME";
 export const SET_LOCALE = "SET_LOCALE";
+export const SET_USERNAME = "SET_USERNAME";

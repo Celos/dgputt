@@ -14,5 +14,12 @@
 	"newGame": "Uus mäng",
 	"delete": "Kustuta",
 	"undo": "Tühista",
-	"gameDeleted": "Mäng kustutatud."
+	"gameDeleted": "Mäng kustutatud.",
+	"askUsername": "Mis su nimi on?",
+	"usernameRequired": "Palun sisesta kasutajanimi",
+	"askPlayerName": "Mängija nimi",
+	"playerNameRequired": "Palun sisesta nimi",
+	"continue": "Edasi",
+	"done": "Valmis",
+	"players": "Mängijad"
 }

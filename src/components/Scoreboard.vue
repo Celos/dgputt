@@ -1,7 +1,10 @@
 <template>
 	<v-card class="mb-1 text-center scoreboard">
-		<div class="distance display-1">{{distance}}m</div>
-		<div class="score display-4 my-10">{{game.score}}</div>
+		<div class="distance display-1">
+			<span v-if="game.players.length > 1">{{playerName}}</span>
+			{{distance}}m
+		</div>
+		<div class="score display-4 my-10">{{currentPlayer.score}}</div>
 		<div class="round display-1">{{round}}</div>
 	</v-card>
 </template>
@@ -11,6 +14,7 @@
 	import Game from "@/types/Game";
 	import Rule from "@/types/Rule";
 	import Rules from "@/components/rules/Rules";
+	import Player from "@/types/Player";
 
 	export default Vue.extend({
 		props: {
@@ -21,12 +25,28 @@
 			distance: {
 				type: Number,
 				required: true
+			},
+			currentPlayer: {
+				type: Object as () => Player,
+				required: true
 			}
 		},
 		computed: {
 			round(): string {
 				let rule: Rule = Rules.byId(this.game.ruleId);
-				return rule.rounds ? this.game.rounds.length + "/" + rule.rounds : "";
+				return rule.rounds ?
+					this.game.rounds
+						.filter(round => round.playerId === this.currentPlayer.id).length + "/" + rule.rounds
+					: "";
+			}
+		},
+		methods: {
+			playerName(): string {
+				if (this.currentPlayer.primary) {
+					return this.$store.getters.user.name
+				} else {
+					return this.currentPlayer.name;
+				}
 			}
 		}
 	});

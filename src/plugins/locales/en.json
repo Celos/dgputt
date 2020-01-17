@@ -14,5 +14,12 @@
 	"newGame": "New game",
 	"delete": "Delete",
 	"undo": "Undo",
-	"gameDeleted": "Game deleted."
+	"gameDeleted": "Game deleted.",
+	"askUsername": "What do you want to be called?",
+	"usernameRequired": "Please enter your username",
+	"playerNameRequired": "Please enter a name",
+	"askPlayerName": "Player name",
+	"continue": "Continue",
+	"done": "Done",
+	"players": "Players"
 }

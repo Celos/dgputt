@@ -2,6 +2,7 @@ import State from "@/types/State";
 import Game from "@/types/Game";
 import Round from "@/types/Round";
 import {MutationTree} from "vuex";
+import Player from "@/types/Player";
 
 export const mutationTypes = {
 	ADD_GAME: "ADD_GAME",
@@ -15,7 +16,8 @@ export const mutationTypes = {
 	DEACTIVATE_GAME: "DEACTIVATE_GAME",
 	COMPLETE_GAME: "COMPLETE_GAME",
 	UNCOMPLETE_GAME: "UNCOMPLETE_GAME",
-	SET_UNDO: "SET_UNDO"
+	SET_UNDO: "SET_UNDO",
+	SET_USERNAME: "SET_USERNAME"
 };
 
 export const mutations: MutationTree<State> = {
@@ -34,8 +36,8 @@ export const mutations: MutationTree<State> = {
 	[mutationTypes.DELETE_ROUND](state: State, payload: {game: Game, roundIdx: number}) {
 		payload.game.rounds.splice(payload.roundIdx, 1);
 	},
-	[mutationTypes.SCORE](state: State, payload: {game: Game, updateScore: number}) {
-		payload.game.score += payload.updateScore;
+	[mutationTypes.SCORE](state: State, payload: {player: Player, updateScore: number}) {
+		payload.player.score += payload.updateScore;
 	},
 	[mutationTypes.COMPLETE_GAME](state: State, game: Game) {
 		game.completed = Date.now();
@@ -56,5 +58,8 @@ export const mutations: MutationTree<State> = {
 	},
 	[mutationTypes.SET_LOCALE](state: State, payload: {locale: "en" | "et"}): void {
 		state.user.settings.locale = payload.locale;
+	},
+	[mutationTypes.SET_USERNAME](state: State, newUsername) {
+		state.user.name = newUsername;
 	}
 };

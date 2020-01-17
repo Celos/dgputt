@@ -3,14 +3,10 @@ import Game from "@/types/Game";
 
 export default {
 	byId: (state: State) => (id: string) => {
-		let filtered = state.games.filter(game => game.id === id);
-		return filtered.length ? filtered[0] : undefined;
+		return state.games.find(game => game.id === id);
 	},
 	active: (state: State, getters: any) => {
 		return state.activeGameId ? getters.byId(state.activeGameId) : undefined;
-	},
-	all: (state: State) => {
-		return state.games;
 	},
 	completed: (state: State) => {
 		return [...state.games.filter(game => game.completed !== undefined)].sort((a: Game, b: Game): number => {

@@ -9,12 +9,12 @@ export default class GameFactory {
 		return {
 			id: uuid(),
 			ruleId: rules.id,
-			score: 0,
 			players: [{
 				primary: true,
 				id: 1,
 				userId: user.id,
-				name: user.name
+				name: user.name!,
+				score: 0
 			}],
 			rounds: [],
 			completed: undefined

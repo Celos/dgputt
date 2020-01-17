@@ -1,7 +1,9 @@
 <template>
 	<div class="game">
 		<div class="scoreboard-container mb-2">
-			<Scoreboard :game="game" :distance="currentDistance"/>
+			<Scoreboard :game="game"
+				:distance="currentDistance"
+				:currentPlayer="currentPlayer"/>
 		</div>
 		<div class="scoring-container">
 			<ScoreInput :discs="rules.discs" @score="addRound" />
@@ -17,14 +19,15 @@
 <script lang="ts">
 	import Scoreboard from "./Scoreboard.vue";
 	import ScoreInput from "./ScoreInput.vue";
-	
+
 	import Vue from "vue";
 	import Game from "@/types/Game";
 	import {ADD_ROUND, DELETE_GAME, DELETE_ROUND} from "@/store/action-types";
 	import Round from "@/types/Round";
 	import Rule from '@/types/Rule';
 	import Rules from './rules/Rules';
-	
+	import Player from "@/types/Player";
+
 	export default Vue.extend({
 		name: "Game",
 		props: {
@@ -38,11 +41,23 @@
 				return Rules.byId(this.game.ruleId);
 			},
 			currentDistance(): number {
-				if (!this.game.rounds.length) {
+				if (!this.game.rounds.length || !this.currentPlayerRounds.length) {
 					return this.rules.start;
 				}
-				let prevRound = this.game.rounds[this.game.rounds.length - 1];
+				let prevRound = this.currentPlayerRounds[this.currentPlayerRounds.length - 1];
 				return this.rules.nextRound(prevRound.distance, prevRound.hits);
+			},
+			currentPlayerRounds(): Round[] {
+				return this.game.rounds.filter(round => round.playerId === this.currentPlayer.id);
+			},
+			currentPlayer(): Player {
+				if (this.game.players.length === 1 || !this.game.rounds.length) {
+					return this.game.players[0];
+				}
+				let prevId = this.game.rounds[this.game.rounds.length - 1].playerId;
+				let prevPlayerIdx = this.game.players.findIndex(player => player.id === prevId);
+				let currentPlayerIdx = prevPlayerIdx + 1 === this.game.players.length ? 0 : prevPlayerIdx + 1;
+				return this.game.players[currentPlayerIdx];
 			},
 			notFirst(): boolean {
 				return this.game.rounds.length > 0;
@@ -51,7 +66,7 @@
 		methods: {
 			addRound(hits: number): void {
 				let round: Round = {
-					playerId: 1,
+					playerId: this.currentPlayer.id,
 					distance: this.currentDistance,
 					hits: hits
 				};

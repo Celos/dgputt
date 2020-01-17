@@ -7,13 +7,12 @@ const rootState: State = {
 	games: [],
 	user: {
 		id: uuid(),
-		name: "Anonymous",
 		settings: {
 			theme: "light",
 			locale: "en"
 		}
 	},
 	undo: undefined
-}
+};
 
 export default rootState;

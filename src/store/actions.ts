@@ -1,6 +1,15 @@
 import {ActionContext, ActionTree} from 'vuex';
 import State from "@/types/State";
-import {ADD_GAME, ADD_ROUND, DELETE_GAME, DELETE_ROUND, SET_LOCALE, SET_THEME, UNDO} from "@/store/action-types";
+import {
+	ADD_GAME,
+	ADD_ROUND,
+	DELETE_GAME,
+	DELETE_ROUND,
+	SET_LOCALE,
+	SET_THEME,
+	SET_USERNAME,
+	UNDO
+} from "@/store/action-types";
 import Game from "@/types/Game";
 import {mutationTypes} from "@/store/mutations";
 import Round from "@/types/Round";
@@ -19,7 +28,7 @@ export const actions: ActionTree<State, State> = {
 		let rules: Rule = Rules.byId(payload.game.ruleId);
 		context.commit(mutationTypes.ADD_ROUND, payload);
 		context.commit(mutationTypes.SCORE, {
-			game: payload.game,
+			player: payload.game.players.find(player => player.id === payload.round.playerId),
 			updateScore: rules.score(payload.round.distance, payload.round.hits)
 		});
 		if (rules.endCondition(payload.game)) {
@@ -46,7 +55,7 @@ export const actions: ActionTree<State, State> = {
 		let round = payload.game.rounds[payload.roundIdx];
 		let score = Rules.byId(payload.game.ruleId).score(round.distance, round.hits);
 		context.commit(mutationTypes.SCORE, {
-			game: payload.game,
+			player: payload.game.players.find(player => player.id === round.playerId),
 			updateScore: -score
 		});
 		context.commit(mutationTypes.DELETE_ROUND, payload);
@@ -60,4 +69,7 @@ export const actions: ActionTree<State, State> = {
 	[SET_LOCALE] (context: ActionContext<State, State>, payload: {locale: "en" | "et"}) {
 		context.commit(mutationTypes.SET_LOCALE, payload);
 	},
-}
+	[SET_USERNAME](context: ActionContext<State, State>, newUsername: string) {
+		context.commit(mutationTypes.SET_USERNAME, newUsername);
+	}
+};

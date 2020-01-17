@@ -24,6 +24,12 @@ describe("GameFactory.ts", () => {
 		let game: Game = GameFactory.create(Jyly, testUser);
 		expect(game.completed).toBeUndefined();
 		expect(game.rounds.length).toBe(0);
-		expect(game.score).toBe(0);
+	});
+
+	it("Creates game with user details", () => {
+		let game: Game = GameFactory.create(Jyly, testUser);
+		expect(game.players[0].id).toBe(1);
+		expect(game.players[0].score).toBe(0);
+		expect(game.players[0].primary).toBe(true);
 	})
-})
+});

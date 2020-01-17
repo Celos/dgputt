@@ -1,6 +1,7 @@
 export default interface Player {
 	id: number;
-	userId: string;
+	userId?: string;
 	primary: boolean;
 	name: string;
+	score: number;
 }

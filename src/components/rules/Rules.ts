@@ -10,9 +10,11 @@ export default class Rules {
 	}
 
 	public static byId(id: string): Rule {
-		return Rules.all()
-			.filter(rule => rule.id === id)
-			.reduce((acc, rule) => rule);
+		let rule: Rule | undefined = Rules.all().find(rule => rule.id === id);
+		if (!rule) {
+			throw new Error("Unknown rule " + id);
+		}
+		return rule;
 	}
 
 }

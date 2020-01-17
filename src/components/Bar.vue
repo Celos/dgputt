@@ -10,7 +10,7 @@
 	export default Vue.extend({
 		name: "Bar",
 		props: {
-			at: Number
+			at: Number,
 		},
 		computed: {
 			barType(): string {
