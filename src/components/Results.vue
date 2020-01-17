@@ -84,8 +84,10 @@
 			playerName(player: Player): string {
 				if (player.primary) {
 					return this.$store.getters.user.name
-				} else {
+				} else if (player.name) {
 					return player.name;
+				} else {
+					return "N/A";
 				}
 			}
 		},

@@ -82,7 +82,7 @@
 			startGame(ruleId: string): void {
 				let rule = Rules.byId(ruleId);
 				if (rule) {
-					let game = GameFactory.create(rule, this.$store.getters.user);
+					let game = GameFactory.create(rule);
 					if (this.players.length > 0) {
 						this.players.forEach(player => game.players.push(player));
 					}

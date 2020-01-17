@@ -44,8 +44,10 @@
 			playerName(): string {
 				if (this.currentPlayer.primary) {
 					return this.$store.getters.user.name
-				} else {
+				} else if(this.currentPlayer.name) {
 					return this.currentPlayer.name;
+				} else {
+					return "N/A";
 				}
 			}
 		}
