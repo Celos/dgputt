@@ -3,37 +3,38 @@ import VueRouter from "vue-router"
 import GameSelectionView from "@/views/GameSelectionView.vue";
 import GameView from "@/views/GameView.vue";
 import {gameGuard, gamesGuard, resultGuard} from './router-guards';
+import {routeNames} from "@/plugins/routeNames";
 
 Vue.use(VueRouter);
 
 const routes = [
 	{
 		path: "/games",
-		name: "games",
+		name: routeNames.games,
 		component: GameSelectionView,
 		beforeEnter: gamesGuard
 	},
 	{
 		path: "/games/game/:id",
-		name: "game",
+		name: routeNames.game,
 		props: true,
 		component: GameView,
 		beforeEnter: gameGuard
 	},
 	{
 		path: "/stats",
-		name: "stats",
+		name: routeNames.stats,
 		component: () => import(/* webpackChunkName: "stats" */ "../views/StatsView.vue")
 	},
 	{
 		path: "/history",
-		name: "history",
+		name: routeNames.history,
 		component: () => import(/* webpackChunkName: "history" */ "../views/HistoryView.vue")
 	},
 	{
 		path: "/history/result/:id",
 		alias: "/games/result/:id",
-		name: "results",
+		name: routeNames.results,
 		props: true,
 		component: () => import(/* webpackChunkName: "results" */ "../views/ResultsView.vue"),
 		beforeEnter: resultGuard

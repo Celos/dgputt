@@ -58,6 +58,7 @@
 	import User from "@/types/User";
 	import PlayerList from "./PlayerList.vue";
 	import UsernameForm from "./UsernameForm.vue";
+	import {routeNames} from "@/plugins/routeNames";
 
 	export default Vue.extend({
 		data() {
@@ -87,7 +88,7 @@
 						this.players.forEach(player => game.players.push(player));
 					}
 					this.$store.dispatch(ADD_GAME, game)
-						.then(() => this.$router.push({name: "game", params: {"id": game.id}}));
+						.then(() => this.$router.push({name: routeNames.game, params: {"id": game.id}}));
 				}
 			},
 			addPlayersClick(): void {

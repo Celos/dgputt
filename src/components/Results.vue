@@ -30,6 +30,7 @@
 	import {DELETE_ROUND} from "@/store/action-types";
 	import Round from "@/types/Round";
 	import Player from "@/types/Player";
+	import {routeNames} from "@/plugins/routeNames";
 
 	export default Vue.extend({
 		props: {
@@ -73,13 +74,13 @@
 					this.$store.dispatch(DELETE_ROUND, {
 						game: this.game,
 						roundIdx: this.game.rounds.length - 1
-					}).then(() => this.$router.push({name: "game", params: {id: this.game.id}}));
+					}).then(() => this.$router.push({name: routeNames.game, params: {id: this.game.id}}));
 				} else {
-					this.$router.push({name: "history"});
+					this.$router.push({name: routeNames.history});
 				}
 			},
 			newGame(): void {
-				this.$router.push({name: "games"});
+				this.$router.push({name: routeNames.games});
 			},
 			playerName(player: Player): string {
 				if (player.primary) {

@@ -80,7 +80,7 @@
 			deleteEverything(): void {
 				if (confirm(this.$t("deleteEverythingWarning").toString())) {
 					window.localStorage.clear();
-					this.$router.push({name: "games"});
+					window.location.href = "/games";
 				}
 			}
 		},

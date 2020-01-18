@@ -27,6 +27,7 @@
 	import Rule from '@/types/Rule';
 	import Rules from './rules/Rules';
 	import Player from "@/types/Player";
+	import {routeNames} from "@/plugins/routeNames";
 
 	export default Vue.extend({
 		name: "Game",
@@ -89,7 +90,7 @@
 			newGame(): void {
 				let id = this.game.id;
 				this.$store.dispatch(DELETE_GAME, id).then(() => {
-					this.$router.push({name: "games"});
+					this.$router.push({name: routeNames.games});
 				});
 			}
 		},
