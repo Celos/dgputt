@@ -1,7 +1,7 @@
 <template>
 	<v-card class="mb-1 text-center scoreboard">
 		<div class="distance display-1">
-			<span v-if="game.players.length > 1">{{playerName}}</span>
+			<span v-if="game.players.length > 1">{{playerName()}}</span>
 			{{distance}}m
 		</div>
 		<div class="score display-4 my-10">{{currentPlayer.score}}</div>
