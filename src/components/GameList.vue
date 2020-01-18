@@ -52,9 +52,9 @@
 				this.$store.dispatch(DELETE_GAME, gameId).then(() => this.snackbar = true);
 			},
 			dateString(timestamp: number): string {
-				return new Date(timestamp).toISOString()
-					.replace("T", " ")
-					.replace(/:[0-9]{2}\..*/, "");
+				return new Date(timestamp).toLocaleDateString(undefined, {
+					year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", "minute": "2-digit"
+				});
 			},
 			undo(): void {
 				this.$store.dispatch(UNDO).then(() => this.snackbar = false);
