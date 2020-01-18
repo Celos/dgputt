@@ -35,5 +35,7 @@
 	html, body {
 		width: 100%;
 		overflow-x: hidden;
+		height: 100%;
+		overflow-y: auto;
 	}
 </style>

@@ -21,5 +21,7 @@
 	"askPlayerName": "Player name",
 	"continue": "Continue",
 	"done": "Done",
-	"players": "Players"
+	"players": "Players",
+	"deleteEverything": "Delete data",
+	"deleteEverythingWarning": "WARNING! You are about to delete everything, including past games and other statistics!"
 }

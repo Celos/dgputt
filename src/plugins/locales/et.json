@@ -21,5 +21,7 @@
 	"playerNameRequired": "Palun sisesta nimi",
 	"continue": "Edasi",
 	"done": "Valmis",
-	"players": "Mängijad"
+	"players": "Mängijad",
+	"deleteEverything": "Kustuta kõik",
+	"deleteEverythingWarning": "ETTEVAATUST! Oled kustutamas kõiki oma salvestatud andmeid, sh. kõik mängud ja muu statistika!"
 }

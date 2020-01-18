@@ -15,6 +15,9 @@
 			<v-list-item>
 				<v-select v-model="locale" :label="$t('language')" :items="langs"/>
 			</v-list-item>
+			<v-list-item>
+				<v-btn color="error" @click="deleteEverything">{{$t("deleteEverything")}}</v-btn>
+			</v-list-item>
 		</v-list>
 
 		<v-dialog v-model="changeUsernameDialog">
@@ -73,6 +76,12 @@
 			setUsername(newUsername: string): void {
 				this.$store.dispatch(SET_USERNAME, newUsername);
 				this.changeUsernameDialog = false;
+			},
+			deleteEverything(): void {
+				if (confirm(this.$t("deleteEverythingWarning").toString())) {
+					window.localStorage.clear();
+					this.$router.push({name: "games"});
+				}
 			}
 		},
 		created(): void {
