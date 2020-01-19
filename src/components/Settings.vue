@@ -16,6 +16,9 @@
 				<v-select v-model="locale" :label="$t('language')" :items="langs"/>
 			</v-list-item>
 			<v-list-item>
+				<v-btn @click="exportData">{{$t("exportData")}}</v-btn>
+			</v-list-item>
+			<v-list-item>
 				<v-btn color="error" @click="deleteEverything">{{$t("deleteEverything")}}</v-btn>
 			</v-list-item>
 		</v-list>
@@ -31,7 +34,8 @@
 	import {SET_LOCALE, SET_THEME, SET_USERNAME} from "@/store/action-types";
 	import User from "@/types/User";
 	import UsernameForm from "@/components/UsernameForm.vue";
-	
+	import {saveAs} from "file-saver";
+
 	export default Vue.extend({
 		name: "Settings",
 		data () {
@@ -82,6 +86,10 @@
 					window.localStorage.clear();
 					window.location.href = "/games";
 				}
+			},
+			exportData() {
+				let blob: Blob = new Blob([JSON.stringify(this.$store.state)], {type: "application/json;charset=utf-8"})
+				saveAs(blob, "dgputt.state.json");
 			}
 		},
 		created(): void {

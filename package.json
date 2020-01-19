@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "core-js": "^3.4.4",
+    "file-saver": "^2.0.2",
     "uuidv4": "^6.0.1",
     "vue": "^2.6.10",
     "vue-i18n": "^8.0.0",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",
+    "@types/file-saver": "^2.0.1",
     "@types/jest": "^24.0.19",
     "@types/webpack": "^4.4.0",
     "@vue/cli-plugin-babel": "^4.1.0",

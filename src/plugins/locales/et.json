@@ -22,8 +22,9 @@
 	"continue": "Edasi",
 	"done": "Valmis",
 	"players": "Mängijad",
-	"deleteEverything": "Kustuta kõik",
+	"deleteEverything": "Kustuta andmed",
 	"deleteEverythingWarning": "ETTEVAATUST! Oled kustutamas kõiki oma salvestatud andmeid, sh. kõik mängud ja muu statistika!",
 	"prev": "{player} sai {distance}m pealt {hits} sisse",
-	"upNext": "Järgmisena: {player} {distance}m pealt"
+	"upNext": "Järgmisena: {player} {distance}m pealt",
+	"exportData": "Ekspordi andmed"
 }
