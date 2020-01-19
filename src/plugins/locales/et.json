@@ -23,5 +23,7 @@
 	"done": "Valmis",
 	"players": "Mängijad",
 	"deleteEverything": "Kustuta kõik",
-	"deleteEverythingWarning": "ETTEVAATUST! Oled kustutamas kõiki oma salvestatud andmeid, sh. kõik mängud ja muu statistika!"
+	"deleteEverythingWarning": "ETTEVAATUST! Oled kustutamas kõiki oma salvestatud andmeid, sh. kõik mängud ja muu statistika!",
+	"prev": "{player} sai {distance}m pealt {hits} sisse",
+	"upNext": "Järgmisena: {player} {distance}m pealt"
 }

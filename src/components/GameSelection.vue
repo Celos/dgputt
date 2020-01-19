@@ -59,6 +59,7 @@
 	import PlayerList from "./PlayerList.vue";
 	import UsernameForm from "./UsernameForm.vue";
 	import {routeNames} from "@/plugins/routeNames";
+	import DefaultPlayer from "@/models/DefaultPlayer";
 
 	export default Vue.extend({
 		data() {
@@ -106,12 +107,7 @@
 			addPlayers(): void {
 				let form: any = this.$refs.addPlayersForm;
 				if (form.validate()) {
-					this.players.push({
-						id: this.lastPlayerId,
-						name: this.playerName,
-						primary: false,
-						score: 0
-					});
+					this.players.push(new DefaultPlayer(this.lastPlayerId, false, this.playerName));
 					this.lastPlayerId = this.lastPlayerId + 1;
 					this.playerName = "";
 					form.resetValidation();

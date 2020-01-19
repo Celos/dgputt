@@ -18,9 +18,10 @@
 </template>
 
 <script lang="ts">
+	import Vue from "vue";
 	import Settings from "./components/Settings.vue";
-	
-	export default {
+
+	export default Vue.extend({
 		name: "App",
 		data: () => ({
 			drawerOpen: false
@@ -28,7 +29,7 @@
 		components: {
 			Settings
 		}
-	};
+	});
 </script>
 
 <style>

@@ -1,0 +1,63 @@
+<template>
+	<div>
+		<div v-if="multiplayer" class="headline text-break">
+			{{$store.getters.playerName(player)}}
+		</div>
+		<div class="display-1">{{distance}}m</div>
+		<div class="player-score display-4 my-10">{{player.score}}</div>
+		<div class="round display-1">{{round}}</div>
+	</div>
+</template>
+
+<script lang="ts">
+	import Vue from "vue";
+	import Player from "@/types/Player";
+	import Game from "@/types/Game";
+	import Rule from "@/types/Rule";
+	import Rules from "@/components/rules/Rules";
+	import Round from "@/types/Round";
+
+	export default Vue.extend({
+		props: {
+			multiplayer: {
+				type: Boolean,
+				required: true
+			},
+			game: {
+				type: Object as () => Game,
+				required: true
+			},
+			player: {
+				type: Object as () => Player,
+				required: true
+			}
+		},
+		computed: {
+			rules(): Rule {
+				return Rules.byId(this.game.ruleId);
+			},
+			playerRounds(): Round[] {
+				return this.game.rounds.filter(round => round.playerId === this.player.id);
+			},
+			previousRound(): Round | undefined {
+				return this.playerRounds.length ? this.playerRounds[this.playerRounds.length - 1] : undefined;
+			},
+			distance(): number {
+				return this.previousRound ? this.rules.nextRound(this.previousRound.distance, this.previousRound.hits) : this.rules.start;
+			},
+			round(): string {
+				return this.rules.rounds ? this.playerRounds.length + "/" + this.rules.rounds : "";
+			}
+		}
+	});
+</script>
+
+<style scoped>
+	.player-score.player-score {
+		font-size: 10rem !important;
+	}
+	.row {
+		display: flex;
+		flex-direction: row;
+	}
+</style>

@@ -1,9 +1,9 @@
 <template>
 	<div class="game">
 		<div class="scoreboard-container mb-2">
-			<Scoreboard :game="game"
+			<ScoreDisplay :game="game"
 				:distance="currentDistance"
-				:currentPlayer="currentPlayer"/>
+				:player="currentPlayer"/>
 		</div>
 		<div class="scoring-container">
 			<ScoreInput :discs="rules.discs" @score="addRound" />
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-	import Scoreboard from "./Scoreboard.vue";
+	import ScoreDisplay from "./ScoreDisplay.vue";
 	import ScoreInput from "./ScoreInput.vue";
 
 	import Vue from "vue";
@@ -95,7 +95,7 @@
 			}
 		},
 		components: {
-			Scoreboard, ScoreInput
+			ScoreDisplay, ScoreInput
 		}
 	});
 </script>

@@ -10,7 +10,7 @@ import {actions} from "@/store/actions";
 Vue.use(Vuex);
 
 export default new Vuex.Store<State>({
-	strict: true,
+	strict: process.env.NODE_ENV !== "production",
 	state: rootState,
 	getters: getters,
 	mutations: mutations,

@@ -1,9 +1,10 @@
 <template>
 	<div>
 		<v-card v-for="player in game.players" :key="player.id" class="mb-2">
-			<div class="display-4 text-center">
-				<span v-if="game.players.length > 1">{{playerName(player)}}</span> {{player.score}}
+			<div v-if="game.players.length > 1" class="headline text-center">
+				{{$store.getters.playerName(player)}}
 			</div>
+			<div class="display-4 text-center">{{player.score}}</div>
 			<div class="result__row-container pa-2">
 				<template v-for="(result, idx) in calculatePlayerResults(player.id)">
 					<span class="result__distance font-weight-bold" :key="idx + '-distance'">{{idx}}m: </span>
@@ -29,7 +30,6 @@
 	import Rule from "@/types/Rule";
 	import {DELETE_ROUND} from "@/store/action-types";
 	import Round from "@/types/Round";
-	import Player from "@/types/Player";
 	import {routeNames} from "@/plugins/routeNames";
 
 	export default Vue.extend({
@@ -81,15 +81,6 @@
 			},
 			newGame(): void {
 				this.$router.push({name: routeNames.games});
-			},
-			playerName(player: Player): string {
-				if (player.primary) {
-					return this.$store.getters.user.name
-				} else if (player.name) {
-					return player.name;
-				} else {
-					return "N/A";
-				}
 			}
 		},
 		components: {

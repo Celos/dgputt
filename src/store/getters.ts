@@ -1,5 +1,6 @@
 import State from "@/types/State";
 import Game from "@/types/Game";
+import Player from "@/types/Player";
 
 export default {
 	byId: (state: State) => (id: string) => {
@@ -18,6 +19,15 @@ export default {
 	},
 	user: (state: State) => {
 		return state.user;
+	},
+	playerName: (state: State, getters: any) => (player: Player) => {
+		if (player.primary) {
+			return getters.user.name
+		} else if(player.name) {
+			return player.name;
+		} else {
+			return "N/A";
+		}
 	},
 	isDark: (state: State) => {
 		return state.user.settings.theme === "dark";
