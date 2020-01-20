@@ -44,28 +44,28 @@
 		border-color: grey;
 	}
 	.bar--red {
-		border-color: red;
+		border-color: #C62828;
 	}
 	.bar--orange {
-		border-color: orange;
+		border-color: #FB8C00;
 	}
 	.bar--yellow {
-		border-color: yellow;
+		border-color: #FDD835;
 	}
 	.bar--green {
-		border-color: green;
+		border-color: #43A047;
 	}
 	.bar--red .bar__filled {
-		background-color: red;
+		background-color: #C62828;
 	}
 	.bar--orange .bar__filled {
-		background-color: orange;
+		background-color: #FB8C00;
 	}
 	.bar--yellow .bar__filled {
-		background-color: yellow;
+		background-color: #FDD835;
 	}
 	.bar--green .bar__filled {
-		background-color: green;
+		background-color: #43A047;
 	}
 </style>
 
