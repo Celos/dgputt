@@ -26,5 +26,6 @@
 	"deleteEverythingWarning": "WARNING! You are about to delete everything, including past games and other statistics!",
 	"prev": "Previous round: {player} hit {hits} from {distance}m",
 	"upNext": "Up next: {player} from {distance}m",
-	"exportData": "Export data"
+	"exportData": "Export data",
+	"rounds": "Round breakdown"
 }
