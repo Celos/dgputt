@@ -11,12 +11,14 @@
 		name: "Bar",
 		props: {
 			at: Number,
+			total: Number
 		},
 		computed: {
 			barType(): string {
-				let barColor = this.at < 25 ? "red"
-					: this.at < 50 ? "orange"
-						: this.at < 75 ? "yellow" : "green";
+				let barColor = this.at === 0 && this.total === 0 ? "grey"
+					: this.at < 25 ? "red"
+						: this.at < 50 ? "orange"
+							: this.at < 75 ? "yellow" : "green";
 				return "bar--" + barColor;
 			},
 			width(): string {
@@ -37,6 +39,9 @@
 	.bar__filled {
 		height: 100%;
 		border-radius: 0.2rem;
+	}
+	.bar--grey {
+		border-color: grey;
 	}
 	.bar--red {
 		border-color: red;

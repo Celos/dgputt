@@ -41,7 +41,7 @@ const routes = [
 	},
 	{
 		path: "*",
-		redirect: {name: "games"}
+		redirect: {name: routeNames.games}
 	}
 ];
 

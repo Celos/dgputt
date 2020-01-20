@@ -9,7 +9,7 @@
 				<template v-for="(result, idx) in calculatePlayerResults(player.id)">
 					<span class="result__distance font-weight-bold" :key="idx + '-distance'">{{idx}}m: </span>
 					<span class="result__hits" :key="idx + '-hits'">{{result.hits}} / {{result.total}}</span>
-					<Bar :at="percent(result)" :key="idx + '-bar'"/>
+					<Bar :at="percent(result)" :total="result.total" :key="idx + '-bar'"/>
 					<span class="percent" :key="idx + '-percent'">{{percent(result)}}%</span>
 				</template>
 			</div>
@@ -133,16 +133,14 @@
 	}
 	.result__round-breakdown {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		grid-template-columns: repeat(5, 1fr);
 		grid-auto-rows: max-content;
 		width: 100%;
 	}
-	.result__round-breakdown--light .result__round,
-	.result__round-breakdown--light .result__round > span {
+	.result__round-breakdown--light .result__round {
 		border-color: #E0E0E0;
 	}
-	.result__round-breakdown--dark .result__round,
-	.result__round-breakdown--dark .result__round > span {
+	.result__round-breakdown--dark .result__round {
 		border-color: #616161;
 	}
 	.result__round {
@@ -164,12 +162,6 @@
 	}
 	.nowrap {
 		white-space: nowrap;
-	}
-	.result__round > span {
-		border-bottom: 1px solid inherit;
-	}
-	.result__round > span:last-child {
-		border-bottom: none;
 	}
 	.result__round--red {
 		background-color: rgba(239,83,80,0.2);
