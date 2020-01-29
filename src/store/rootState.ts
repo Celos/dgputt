@@ -12,7 +12,8 @@ const rootState: State = {
 			locale: "en"
 		}
 	},
-	undo: undefined
+	undo: undefined,
+	customRulesets: []
 };
 
 export default rootState;

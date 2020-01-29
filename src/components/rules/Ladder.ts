@@ -1,19 +1,38 @@
 import Rule from "@/types/Rule";
 import Game from "@/types/Game";
 
-const distances = [5,6,7,8,9,10];
+const start = 5;
+const discs = 3;
 
 const Ladder: Rule = {
 	id: "ladder",
 	rounds: undefined,
-	distances: distances,
-	start: distances[0],
-	discs: 3,
+	distances: (game: Game) => {
+		let distances: number[] = [];
+		let startingDistance = game.ruleModifiers && game.ruleModifiers.start ? game.ruleModifiers.start : start;
+		let end = startingDistance + 5;
+		for (let i = startingDistance; i <= end; i++) {
+			distances.push(i);
+		}
+		return distances;
+	},
+	start: start,
+	discs: discs,
 	color: "orange",
-	nextRound: (distance: number, hits: number) => {
-		if (hits < 2) {
-			return distance === distances[0] ? distances[0] : distance - 1;
-		} else if (hits > 2) {
+	nextRound: (distance: number, hits: number, afterRoundState: Game) => {
+		let startingDistance = start;
+		let totalDiscs = discs;
+		if (afterRoundState.ruleModifiers) {
+			if (afterRoundState.ruleModifiers.start) {
+				startingDistance = afterRoundState.ruleModifiers.start;
+			}
+			if (afterRoundState.ruleModifiers.discs) {
+				totalDiscs = afterRoundState.ruleModifiers.discs;
+			}
+		}
+		if (hits/totalDiscs < 0.5) {
+			return distance === startingDistance ? startingDistance : distance - 1;
+		} else if (hits/totalDiscs > 0.75) {
 			return distance + 1;
 		}
 		return distance;
@@ -22,7 +41,8 @@ const Ladder: Rule = {
 	endCondition: (afterRoundState: Game) => {
 		let lastRound = afterRoundState.rounds[afterRoundState.rounds.length - 1];
 		return lastRound.distance >= 10 && lastRound.hits == 3;
-	}
+	},
+	validOverrides: ["start", "discs"]
 };
 
 export default Ladder;

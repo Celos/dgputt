@@ -42,11 +42,25 @@
 			previousRound(): Round | undefined {
 				return this.playerRounds.length ? this.playerRounds[this.playerRounds.length - 1] : undefined;
 			},
+			startingDistance(): number {
+				let startingDistance = this.rules.start;
+				if (this.game.ruleModifiers && this.game.ruleModifiers.start) {
+					startingDistance = this.game.ruleModifiers.start;
+				}
+				return startingDistance;
+			},
 			distance(): number {
-				return this.previousRound ? this.rules.nextRound(this.previousRound.distance, this.previousRound.hits) : this.rules.start;
+				return this.previousRound ? this.rules.nextRound(this.previousRound.distance, this.previousRound.hits, this.game) : this.startingDistance;
+			},
+			totalRounds(): number | undefined {
+				let totalRounds = this.rules.rounds;
+				if (this.game.ruleModifiers && this.game.ruleModifiers.rounds) {
+					totalRounds = this.game.ruleModifiers.rounds;
+				}
+				return totalRounds;
 			},
 			round(): string {
-				return this.rules.rounds ? this.playerRounds.length + "/" + this.rules.rounds : "";
+				return this.totalRounds ? (this.playerRounds.length + 1) + "/" + this.totalRounds : "";
 			}
 		}
 	});

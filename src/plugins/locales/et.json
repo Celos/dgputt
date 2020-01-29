@@ -27,5 +27,14 @@
 	"prev": "{player} sai {distance}m pealt {hits} sisse",
 	"upNext": "Järgmisena: {player} {distance}m pealt",
 	"exportData": "Ekspordi andmed",
-	"rounds": "Võistlusringid"
+	"rounds": "Võistlusringid",
+	"customGame": "Kohandatud",
+	"customGame.description": "Loo muudetud reeglitega mäng.",
+	"baseRules": "Vali reeglid, mida kohandada",
+	"custom.start": "Algkaugus (m)",
+	"custom.discs": "Ketaste arv",
+	"custom.rounds": "Mänguringide arv",
+	"startGame": "Alusta",
+	"close": "Sulge",
+	"customRuleset": "Kohandatud {base}"
 }

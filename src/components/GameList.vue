@@ -4,7 +4,7 @@
 			<template v-for="(game, idx) in games">
 				<v-list-item class="py-1" :key="game.id + '-item'" :to="{name: 'results', params: {id: game.id}}">
 					<div class="game-result pr-2">
-						<v-chip class="ma-2" :color="rule(game.ruleId).color" text-color="white">{{$t(game.ruleId)}}</v-chip>
+						<v-chip class="ma-2" :color="rule(game.ruleId).color" text-color="white">{{chip(game)}}</v-chip>
 						<span class="font-weight-medium title middle">{{game.players[0].score}}</span><wbr/>
 						<span class="grey--text middle caption game-result__completed ml-3" >{{dateString(game.completed)}}</span>
 					</div>
@@ -58,6 +58,13 @@
 			},
 			undo(): void {
 				this.$store.dispatch(UNDO).then(() => this.snackbar = false);
+			},
+			chip(game: Game) {
+				let chipText = this.$t(game.ruleId);
+				if (game.ruleModifiers && (game.ruleModifiers.discs || game.ruleModifiers.rounds || game.ruleModifiers.start)) {
+					chipText += "*";
+				}
+				return chipText;
 			}
 		}
 	});

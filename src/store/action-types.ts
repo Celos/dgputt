@@ -6,3 +6,5 @@ export const DELETE_ROUND = "DELETE_ROUND";
 export const SET_THEME = "SET_THEME";
 export const SET_LOCALE = "SET_LOCALE";
 export const SET_USERNAME = "SET_USERNAME";
+export const ADD_CUSTOM_RULESET = "ADD_CUSTOM_RULESET";
+export const REMOVE_CUSTOM_RULESET = "REMOVE_CUSTOM_RULESET";

@@ -6,7 +6,7 @@
 				:player="currentPlayer"/>
 		</div>
 		<div class="scoring-container">
-			<ScoreInput :discs="rules.discs" @score="addRound" />
+			<ScoreInput :discs="discs" @score="addRound" />
 			<div class="game__actions mt-2">
 				<v-btn class="game__back" v-show="notFirst" color="secondary" @click="back">{{$t("back")}}</v-btn>
 				<div class="game__actions-divider"></div>
@@ -41,12 +41,26 @@
 			rules(): Rule {
 				return Rules.byId(this.game.ruleId);
 			},
+			discs(): number {
+				let discs = this.rules.discs;
+				if (this.game.ruleModifiers && this.game.ruleModifiers.discs) {
+					discs = this.game.ruleModifiers.discs;
+				}
+				return discs;
+			},
+			startingDistance(): number {
+				let startingDistance = this.rules.start;
+				if (this.game.ruleModifiers && this.game.ruleModifiers.start) {
+					startingDistance = this.game.ruleModifiers.start;
+				}
+				return startingDistance;
+			},
 			currentDistance(): number {
 				if (!this.game.rounds.length || !this.currentPlayerRounds.length) {
-					return this.rules.start;
+					return this.startingDistance;
 				}
 				let prevRound = this.currentPlayerRounds[this.currentPlayerRounds.length - 1];
-				return this.rules.nextRound(prevRound.distance, prevRound.hits);
+				return this.rules.nextRound(prevRound.distance, prevRound.hits, this.game);
 			},
 			currentPlayerRounds(): Round[] {
 				return this.game.rounds.filter(round => round.playerId === this.currentPlayer.id);

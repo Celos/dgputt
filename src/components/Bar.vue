@@ -1,5 +1,5 @@
 <template>
-	<div :class="'bar ' + barType">
+	<div :class="['bar', barType]">
 		<div class="bar__filled" :style="width"></div>
 	</div>
 </template>

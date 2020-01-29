@@ -3,6 +3,7 @@ import Game from "@/types/Game";
 import Round from "@/types/Round";
 import {MutationTree} from "vuex";
 import Player from "@/types/Player";
+import CustomRuleset from "@/types/CustomRuleset";
 
 export const mutationTypes = {
 	ADD_GAME: "ADD_GAME",
@@ -17,7 +18,9 @@ export const mutationTypes = {
 	COMPLETE_GAME: "COMPLETE_GAME",
 	UNCOMPLETE_GAME: "UNCOMPLETE_GAME",
 	SET_UNDO: "SET_UNDO",
-	SET_USERNAME: "SET_USERNAME"
+	SET_USERNAME: "SET_USERNAME",
+	ADD_CUSTOM_RULESET: "ADD_CUSTOM_RULESET",
+	REMOVE_CUSTOM_RULESET: "REMOVE_CUSTOM_RULESET"
 };
 
 export const mutations: MutationTree<State> = {
@@ -61,5 +64,16 @@ export const mutations: MutationTree<State> = {
 	},
 	[mutationTypes.SET_USERNAME](state: State, newUsername) {
 		state.user.name = newUsername;
+	},
+	[mutationTypes.ADD_CUSTOM_RULESET](state: State, customRuleset: CustomRuleset) {
+		if (!state.customRulesets) {
+			state.customRulesets = [];
+		}
+		state.customRulesets.push(customRuleset);
+	},
+	[mutationTypes.REMOVE_CUSTOM_RULESET](state: State, customRulesetId: string) {
+		if (state.customRulesets && state.customRulesets.length > 0) {
+			state.customRulesets = state.customRulesets.filter(customRuleset => customRuleset.id !== customRulesetId);
+		}
 	}
 };

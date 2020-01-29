@@ -16,7 +16,7 @@
 			<div v-if="nextPlayer">
 				{{$t("upNext", {
 					player: $store.getters.playerName(nextPlayer),
-					distance: playerDistance(nextPlayer)
+					distance: nextDistance(nextPlayer)
 				})}}
 			</div>
 		</div>
@@ -65,6 +65,13 @@
 				let playerIdx = this.game.players.findIndex(player => player.id === this.player.id);
 				let nextPlayerIdx = playerIdx + 1 >= this.game.players.length ? 0 : playerIdx + 1;
 				return this.game.players[nextPlayerIdx];
+			},
+			startingDistance(): number {
+				let startingDistance = this.rules.start;
+				if (this.game.ruleModifiers && this.game.ruleModifiers.start) {
+					startingDistance = this.game.ruleModifiers.start;
+				}
+				return startingDistance;
 			}
 		},
 		methods: {
@@ -74,7 +81,15 @@
 			},
 			playerDistance(player: Player): number {
 				let playerRounds = this.playerRounds(player);
-				return playerRounds ? playerRounds[playerRounds.length - 1].distance : this.rules.start;
+				return playerRounds ? playerRounds[playerRounds.length - 1].distance : this.startingDistance;
+			},
+			nextDistance(player: Player): number {
+				let playerRounds = this.playerRounds(player);
+				if (!playerRounds) {
+					return this.startingDistance;
+				}
+				let lastRound = playerRounds[playerRounds.length - 1];
+				return this.rules.nextRound(lastRound.distance, lastRound.hits, this.game);
 			},
 			playerHits(player: Player): number {
 				let playerRounds = this.playerRounds(player);

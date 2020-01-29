@@ -1,16 +1,35 @@
 import Rule from "@/types/Rule";
 import Game from '@/types/Game';
 
+const rounds = 10;
+const start = 5;
+const discs = 5;
+
 const Fifty: Rule = {
 	id: "fifty",
-	rounds: 10,
-	distances: [5],
-	start: 5,
-	discs: 5,
+	rounds: rounds,
+	distances: (game: Game) => {
+		return game.ruleModifiers && game.ruleModifiers.start ? [game.ruleModifiers.start] : [start];
+	},
+	start: start,
+	discs: discs,
 	color: "red",
-	nextRound: () => 5,
+	nextRound: (distance, hits, game: Game) => {
+		let nextRoundDistance = start;
+		if (game.ruleModifiers && game.ruleModifiers.start) {
+			nextRoundDistance = game.ruleModifiers.start;
+		}
+		return nextRoundDistance;
+	},
 	score: (distance: number, hits: number) => hits,
-	endCondition: (afterRoundState: Game) => afterRoundState.rounds.length >= 10 * afterRoundState.players.length
+	endCondition: (game: Game) => {
+		let totalRounds = rounds;
+		if (game.ruleModifiers && game.ruleModifiers.rounds) {
+			totalRounds = game.ruleModifiers.rounds;
+		}
+		return game.rounds.length >= totalRounds * game.players.length
+	},
+	validOverrides: ["rounds", "start", "discs"]
 };
 
 export default Fifty;

@@ -27,5 +27,14 @@
 	"prev": "Previous round: {player} hit {hits} from {distance}m",
 	"upNext": "Up next: {player} from {distance}m",
 	"exportData": "Export data",
-	"rounds": "Round breakdown"
+	"rounds": "Round breakdown",
+	"customGame": "Custom Game",
+	"customGame.description": "Create a game with modified rules.",
+	"baseRules": "Select rules that the custom game will be based on",
+	"custom.start": "Starting distance in meters",
+	"custom.discs": "Number of discs",
+	"custom.rounds": "Number of rounds",
+	"startGame": "Start",
+	"close": "Close",
+	"customRuleset": "Custom {base}"
 }

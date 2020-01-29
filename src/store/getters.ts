@@ -3,6 +3,7 @@ import Game from "@/types/Game";
 import Player from "@/types/Player";
 import User from "@/types/User";
 import Rules from "@/components/rules/Rules";
+import CustomRuleset from "@/types/CustomRuleset";
 
 export default {
 	byId: (state: State) => (id: string): Game | undefined => {
@@ -41,5 +42,14 @@ export default {
 	},
 	locale: (state: State): string => {
 		return state.user.settings.locale;
+	},
+	customRulesets: (state: State): CustomRuleset[] => {
+		return state.customRulesets ? state.customRulesets : [];
+	},
+	customRuleset: (state: State) => (id: string): CustomRuleset | undefined => {
+		if (!state.customRulesets || state.customRulesets.length === 0) {
+			return undefined;
+		}
+		return state.customRulesets.find(customRuleset => customRuleset.id === id);
 	}
 };

@@ -13,7 +13,7 @@
 				<v-icon :color="isDark ? 'primary' : ''">mdi-moon-waxing-crescent</v-icon>
 			</v-list-item>
 			<v-list-item>
-				<v-select v-model="locale" :label="$t('language')" :items="langs"/>
+				<v-select v-model="locale" :label="$t('language')" :items="langs" outlined/>
 			</v-list-item>
 			<v-list-item>
 				<v-btn @click="exportData">{{$t("exportData")}}</v-btn>
@@ -88,7 +88,7 @@
 				}
 			},
 			exportData() {
-				let blob: Blob = new Blob([JSON.stringify(this.$store.state)], {type: "application/json;charset=utf-8"})
+				let blob: Blob = new Blob([JSON.stringify(this.$store.state)], {type: "application/json;charset=utf-8"});
 				saveAs(blob, "dgputt.state.json");
 			}
 		},

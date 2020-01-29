@@ -8,13 +8,16 @@ import {
 	SET_LOCALE,
 	SET_THEME,
 	SET_USERNAME,
-	UNDO
+	UNDO,
+	ADD_CUSTOM_RULESET,
+	REMOVE_CUSTOM_RULESET
 } from "@/store/action-types";
 import Game from "@/types/Game";
 import {mutationTypes} from "@/store/mutations";
 import Round from "@/types/Round";
 import Rule from "@/types/Rule";
 import Rules from "@/components/rules/Rules";
+import CustomRuleset from "@/types/CustomRuleset";
 
 export const actions: ActionTree<State, State> = {
 	[ADD_GAME](context: ActionContext<State, State>, game: Game) {
@@ -29,7 +32,7 @@ export const actions: ActionTree<State, State> = {
 		context.commit(mutationTypes.ADD_ROUND, payload);
 		context.commit(mutationTypes.SCORE, {
 			player: payload.game.players.find(player => player.id === payload.round.playerId),
-			updateScore: rules.score(payload.round.distance, payload.round.hits)
+			updateScore: rules.score(payload.round.distance, payload.round.hits, payload.game)
 		});
 		if (rules.endCondition(payload.game)) {
 			context.commit(mutationTypes.COMPLETE_GAME, payload.game);
@@ -53,7 +56,7 @@ export const actions: ActionTree<State, State> = {
 	},
 	[DELETE_ROUND](context: ActionContext<State, State>, payload: {game: Game, roundIdx: number}) {
 		let round = payload.game.rounds[payload.roundIdx];
-		let score = Rules.byId(payload.game.ruleId).score(round.distance, round.hits);
+		let score = Rules.byId(payload.game.ruleId).score(round.distance, round.hits, payload.game);
 		context.commit(mutationTypes.SCORE, {
 			player: payload.game.players.find(player => player.id === round.playerId),
 			updateScore: -score
@@ -71,5 +74,22 @@ export const actions: ActionTree<State, State> = {
 	},
 	[SET_USERNAME](context: ActionContext<State, State>, newUsername: string) {
 		context.commit(mutationTypes.SET_USERNAME, newUsername);
+	},
+	[ADD_CUSTOM_RULESET](context: ActionContext<State, State>, customRuleset: CustomRuleset) {
+		let existing: CustomRuleset | undefined = undefined;
+		if (context.state.customRulesets && context.state.customRulesets.length > 0) {
+			existing = context.state.customRulesets.find(existingRuleset => {
+				return existingRuleset.ruleId === customRuleset.ruleId
+					&& (existingRuleset.modifiers.rounds === customRuleset.modifiers.rounds)
+					&& (existingRuleset.modifiers.start === customRuleset.modifiers.start)
+					&& (existingRuleset.modifiers.discs === customRuleset.modifiers.discs);
+			});
+		}
+		if (!existing) {
+			context.commit(mutationTypes.ADD_CUSTOM_RULESET, customRuleset);
+		}
+	},
+	[REMOVE_CUSTOM_RULESET](context: ActionContext<State, State>, customRulesetId: string) {
+		context.commit(mutationTypes.REMOVE_CUSTOM_RULESET, customRulesetId);
 	}
 };

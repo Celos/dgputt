@@ -17,11 +17,11 @@
 				<v-expansion-panel v-model="roundsList[idx]">
 					<v-expansion-panel-header>{{$t("rounds")}}</v-expansion-panel-header>
 					<v-expansion-panel-content>
-						<div :class="'result__round-breakdown result__round-breakdown--' + ($store.getters.isDark ? 'dark' : 'light')">
-							<div :class="'result__round pa-2 text-center result__round--' + roundColor(round)" v-for="(round, roundIdx) in playerRounds(player.id)" :key="roundIdx">
+						<div :class="['result__round-breakdown', roundBreakdownClass()]">
+							<div :class="['result__round', 'pa-2', 'text-center', roundColorClass(round)]" v-for="(round, roundIdx) in playerRounds(player.id)" :key="roundIdx">
 								<span class="nowrap">{{roundIdx + 1}}.</span>
 								<span class="nowrap">{{round.distance}}m</span>
-								<span class="nowrap">{{round.hits}}/{{rules.discs}}</span>
+								<span class="nowrap">{{round.hits}}/{{discs}}</span>
 							</div>
 						</div>
 					</v-expansion-panel-content>
@@ -61,6 +61,13 @@
 		computed: {
 			rules(): Rule {
 				return Rules.byId(this.game.ruleId);
+			},
+			discs(): number {
+				let discs = this.rules.discs;
+				if (this.game.ruleModifiers && this.game.ruleModifiers.discs) {
+					discs = this.game.ruleModifiers.discs;
+				}
+				return discs;
 			}
 		},
 		methods: {
@@ -72,11 +79,12 @@
 				return result;
 			},
 			calculatePlayerResults(playerId: number): {[id: number]: {total: number, hits: number}} {
-				let results = this.initializeResults(this.rules.distances);
-				for (let i in this.playerRounds(playerId)) {
-					let round = this.game.rounds[i];
+				let results = this.initializeResults(this.rules.distances(this.game));
+				let playerRounds = this.playerRounds(playerId);
+				for (let i in playerRounds) {
+					let round = playerRounds[i];
 					results[round.distance] = {
-						total: results[round.distance].total + this.rules.discs,
+						total: results[round.distance].total + this.discs,
 						hits: results[round.distance].hits + round.hits,
 					};
 				}
@@ -102,8 +110,14 @@
 				this.$router.push({name: routeNames.games});
 			},
 			roundColor(round: Round): string {
-				let percent = Math.round(round.hits * 100 / this.rules.discs);
+				let percent = Math.round(round.hits * 100 / this.discs);
 				return percent < 25 ? "red" : percent < 50 ? "orange" : percent < 75 ? "yellow" : "green";
+			},
+			roundColorClass(round: Round): string {
+				return "result__round--" + this.roundColor(round);
+			},
+			roundBreakdownClass() {
+				return "result__round-breakdown--" + (this.$store.getters.isDark ? "dark" : "light");
 			}
 		},
 		components: {
