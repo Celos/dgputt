@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import State from "@/types/State";
+import State from "@/model/types/State";
 import VuexPersistence from "vuex-persist";
 import rootState from './rootState';
 import getters from './getters';

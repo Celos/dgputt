@@ -1,9 +1,9 @@
-import State from "@/types/State";
-import Game from "@/types/Game";
-import Round from "@/types/Round";
+import State from "@/model/types/State";
+import Game from "@/model/types/Game";
+import Round from "@/model/types/Round";
 import {MutationTree} from "vuex";
-import Player from "@/types/Player";
-import CustomRuleset from "@/types/CustomRuleset";
+import Player from "@/model/types/Player";
+import CustomRuleset from "@/model/types/CustomRuleset";
 
 export const mutationTypes = {
 	ADD_GAME: "ADD_GAME",

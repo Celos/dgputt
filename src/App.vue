@@ -19,7 +19,7 @@
 
 <script lang="ts">
 	import Vue from "vue";
-	import Settings from "./components/Settings.vue";
+	import Settings from "./components/settings/Settings.vue";
 
 	export default Vue.extend({
 		name: "App",
@@ -38,5 +38,8 @@
 		overflow-x: hidden;
 		height: 100%;
 		overflow-y: auto;
+	}
+	body {
+		position: relative;
 	}
 </style>

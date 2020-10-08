@@ -1,9 +1,9 @@
-import State from "@/types/State";
-import Game from "@/types/Game";
-import Player from "@/types/Player";
-import User from "@/types/User";
-import Rules from "@/components/rules/Rules";
-import CustomRuleset from "@/types/CustomRuleset";
+import State from "@/model/types/State";
+import Game from "@/model/types/Game";
+import Player from "@/model/types/Player";
+import User from "@/model/types/User";
+import Rules from "@/model/rules/Rules";
+import CustomRuleset from "@/model/types/CustomRuleset";
 
 export default {
 	byId: (state: State) => (id: string): Game | undefined => {
@@ -13,7 +13,7 @@ export default {
 		return state.activeGameId ? getters.byId(state.activeGameId) : undefined;
 	},
 	byRule: (state: State): {[ruleId: string]: Game[]} => {
-		let result: {[ruleId: string]: Game[]} = {};
+		const result: {[ruleId: string]: Game[]} = {};
 		Rules.all().forEach(rule => {
 			Object.defineProperty(result, rule.id, {value: [], writable: true, enumerable: true});
 		});

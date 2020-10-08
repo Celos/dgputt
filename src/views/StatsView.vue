@@ -1,12 +1,15 @@
 <template>
-	<v-card class="pa-5">Coming Soon™</v-card>
+	<Stats/>
 </template>
 
 <script lang="ts">
 	import Vue from "vue";
+	import Stats from "@/components/stats/Stats.vue";
 
 	export default Vue.extend({
-	
+		components: {
+			Stats
+		}
 	});
 </script>
 

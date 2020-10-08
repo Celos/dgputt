@@ -1,4 +1,4 @@
-import State from "@/types/State";
+import State from "@/model/types/State";
 import {uuid} from "uuidv4";
 
 const rootState: State = {

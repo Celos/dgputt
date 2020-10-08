@@ -1,6 +1,6 @@
-import Game from "@/types/Game";
-import GameFactory from "@/components/GameFactory";
-import Jyly from "@/components/rules/Jyly";
+import Game from "@/model/types/Game";
+import GameFactory from "@/components/games/GameFactory";
+import Jyly from "@/model/rules/Jyly";
 import uuidv4 from "uuidv4";
 
 jest.mock("uuidv4", () => ({

@@ -1,7 +1,7 @@
-import Jyly from "@/components/rules/Jyly";
-import Rules from '@/components/rules/Rules';
-import Ladder from "@/components/rules/Ladder";
-import Fifty from "@/components/rules/Fifty";
+import Jyly from "@/model/rules/Jyly";
+import Rules from '@/model/rules/Rules';
+import Ladder from "@/model/rules/Ladder";
+import Fifty from "@/model/rules/Fifty";
 
 describe("Rules.ts", () => {
 	it("Returns the correct rule by ID", () => {

@@ -1,5 +1,5 @@
 import {ActionContext, ActionTree} from 'vuex';
-import State from "@/types/State";
+import State from "@/model/types/State";
 import {
 	ADD_GAME,
 	ADD_ROUND,
@@ -12,12 +12,12 @@ import {
 	ADD_CUSTOM_RULESET,
 	REMOVE_CUSTOM_RULESET
 } from "@/store/action-types";
-import Game from "@/types/Game";
+import Game from "@/model/types/Game";
 import {mutationTypes} from "@/store/mutations";
-import Round from "@/types/Round";
-import Rule from "@/types/Rule";
-import Rules from "@/components/rules/Rules";
-import CustomRuleset from "@/types/CustomRuleset";
+import Round from "@/model/types/Round";
+import Rule from "@/model/types/Rule";
+import Rules from "@/model/rules/Rules";
+import CustomRuleset from "@/model/types/CustomRuleset";
 
 export const actions: ActionTree<State, State> = {
 	[ADD_GAME](context: ActionContext<State, State>, game: Game) {
@@ -27,8 +27,8 @@ export const actions: ActionTree<State, State> = {
 	},
 	[ADD_ROUND](context: ActionContext<State, State>, payload: {game: Game, round: Round}) {
 		if (payload.game.completed) return;
-		
-		let rules: Rule = Rules.byId(payload.game.ruleId);
+
+		const rules: Rule = Rules.byId(payload.game.ruleId);
 		context.commit(mutationTypes.ADD_ROUND, payload);
 		context.commit(mutationTypes.SCORE, {
 			player: payload.game.players.find(player => player.id === payload.round.playerId),
@@ -39,7 +39,7 @@ export const actions: ActionTree<State, State> = {
 		}
 	},
 	[DELETE_GAME](context: ActionContext<State, State>, gameId: string) {
-		let game: Game = context.getters.byId(gameId);
+		const game: Game = context.getters.byId(gameId);
 		context.commit(mutationTypes.SET_UNDO, game);
 		context.commit(mutationTypes.DELETE_GAME, gameId);
 		if (gameId === context.state.activeGameId) {
@@ -55,8 +55,8 @@ export const actions: ActionTree<State, State> = {
 		}
 	},
 	[DELETE_ROUND](context: ActionContext<State, State>, payload: {game: Game, roundIdx: number}) {
-		let round = payload.game.rounds[payload.roundIdx];
-		let score = Rules.byId(payload.game.ruleId).score(round.distance, round.hits, payload.game);
+		const round = payload.game.rounds[payload.roundIdx];
+		const score = Rules.byId(payload.game.ruleId).score(round.distance, round.hits, payload.game);
 		context.commit(mutationTypes.SCORE, {
 			player: payload.game.players.find(player => player.id === round.playerId),
 			updateScore: -score

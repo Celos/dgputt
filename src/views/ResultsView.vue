@@ -4,8 +4,8 @@
 
 <script lang="ts">
 	import Vue from "vue";
-	import Game from "@/types/Game";
-	import Results from "@/components/Results.vue";
+	import Game from "@/model/types/Game";
+	import Results from "@/components/results/Results.vue";
 
 	export default Vue.extend({
 		props: {
