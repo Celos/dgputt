@@ -36,5 +36,6 @@
 	"custom.rounds": "Mänguringide arv",
 	"startGame": "Alusta",
 	"close": "Sulge",
-	"customRuleset": "Kohandatud {base}"
+	"customRuleset": "Kohandatud {base}",
+	"addPlayers": "Lisa mängijaid"
 }

@@ -36,8 +36,8 @@
 				</div>
 				<div></div>
 			</v-card-text>
-			<v-btn dark absolute fab bottom right color="pink" @click="addPlayersClick">
-				<v-icon>mdi-account-multiple-plus</v-icon>
+			<v-btn class="btn--fab-like" dark absolute bottom right color="pink" @click="addPlayersClick">
+				{{$t("addPlayers")}}<v-icon class="ml-2">mdi-account-multiple-plus</v-icon>
 			</v-btn>
 		</v-card>
 
@@ -77,10 +77,11 @@
 					<v-select
 						:items="rules"
 						v-model="customRulesetBase"
-						item-text="id"
 						item-value="id"
 						outlined
 						:label="$t('baseRules')">
+						<template v-slot:selection="data">{{ $t(data.item.id) }}</template>
+						<template v-slot:item="data">{{ $t(data.item.id) }}</template>
 					</v-select>
 				</v-list-item>
 				<template v-if="customRulesetBase">
@@ -263,5 +264,8 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+	.btn--fab-like {
+		bottom: -18px;
 	}
 </style>

@@ -1,10 +1,15 @@
 <template>
 	<div>
-		<div v-for="(games, ruleId) in rules" :key="ruleId">
-			<v-card v-if="games.length">
-				<GameChart :rules="rule(ruleId)" :games="games"/>
-			</v-card>
-		</div>
+		<v-expansion-panels v-if="rules">
+			<v-expansion-panel v-for="(games, ruleId) in rules" :key="ruleId">
+				<v-expansion-panel-header v-if="games.length">
+					{{$t(ruleId)}}
+				</v-expansion-panel-header>
+				<v-expansion-panel-content v-if="games.length">
+					<GameChart :rules="rule(ruleId)" :games="games"/>
+				</v-expansion-panel-content>
+			</v-expansion-panel>
+		</v-expansion-panels>
 	</div>
 </template>
 
@@ -17,7 +22,7 @@
 
 	export default Vue.extend({
 		computed: {
-			rules(): {[key: string]: Game[]} {
+			rules(): { [key: string]: Game[] } {
 				return this.$store.getters.byRule;
 			}
 		},

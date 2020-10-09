@@ -36,5 +36,6 @@
 	"custom.rounds": "Number of rounds",
 	"startGame": "Start",
 	"close": "Close",
-	"customRuleset": "Custom {base}"
+	"customRuleset": "Custom {base}",
+	"addPlayers": "Add players"
 }
