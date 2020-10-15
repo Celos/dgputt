@@ -8,10 +8,10 @@ const start = 10;
 const Jyly: Rule = {
 	id: "jyly",
 	rounds: rounds,
-	distances: (game: Game) => {
+	distances: (game?: Game) => {
 		const distances: number[] = [];
-		const startingDistance = game.ruleModifiers && game.ruleModifiers.start ? game.ruleModifiers.start : start;
-		const totalDiscs = game.ruleModifiers && game.ruleModifiers.discs ? game.ruleModifiers.discs : discs;
+		const startingDistance = game && game.ruleModifiers && game.ruleModifiers.start ? game.ruleModifiers.start : start;
+		const totalDiscs = game && game.ruleModifiers && game.ruleModifiers.discs ? game.ruleModifiers.discs : discs;
 		const end = startingDistance - totalDiscs;
 		for (let i = startingDistance; i >= end; i--) {
 			distances.push(i);

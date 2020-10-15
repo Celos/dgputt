@@ -113,10 +113,10 @@
 	import PlayerList from "./PlayerList.vue";
 	import UsernameForm from "../settings/UsernameForm.vue";
 	import {routeNames} from "@/plugins/routeNames";
-	import DefaultPlayer from "@/model/DefaultPlayer";
+	import DefaultPlayer, {PRIMARY_PLAYER} from "@/model/DefaultPlayer";
 	import CustomRuleset from "@/model/types/CustomRuleset";
 	import DefaultCustomRuleset from "@/model/DefaultCustomRuleset";
-	import {uuid} from "uuidv4";
+	import { v4 as uuid } from "uuid";
 	import Game from "@/model/types/Game";
 	import RuleModifiers from "@/model/types/RuleModifiers";
 
@@ -127,7 +127,7 @@
 				addPlayersDialog: false,
 				customGameDialog: false,
 				players: [] as Player[],
-				lastPlayerId: 2,
+				lastPlayerId: PRIMARY_PLAYER.id + 1,
 				playerName: "",
 				playerNameValidationRule: (v: string) => !!v || this.$t("playerNameRequired"),
 				customRulesetBase: undefined as unknown as string | undefined,
@@ -266,6 +266,6 @@
 		justify-content: center;
 	}
 	.btn--fab-like {
-		bottom: -18px;
+		bottom: -22px;
 	}
 </style>

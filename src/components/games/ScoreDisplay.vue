@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-	import Vue from "vue";
+	import Vue, {PropType} from "vue";
 	import Game from "@/model/types/Game";
 	import Player from "@/model/types/Player";
 	import PlayerScoreDisplay from "@/components/games/PlayerScoreDisplay.vue";
@@ -35,11 +35,11 @@
 	export default Vue.extend({
 		props: {
 			game: {
-				type: Object as () => Game,
+				type: Object as PropType<Game>,
 				required: true
 			},
 			player: {
-				type: Object as () => Player,
+				type: Object as PropType<Player>,
 				required: true
 			}
 		},

@@ -4,7 +4,7 @@ export default interface Rule {
 
 	id: string;
 	rounds?: number;
-	distances: (game: Game) => number[];
+	distances: (game?: Game) => number[];
 	start: number;
 	discs: number;
 	color: string;

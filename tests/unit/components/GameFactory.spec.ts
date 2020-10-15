@@ -1,10 +1,10 @@
 import Game from "@/model/types/Game";
 import GameFactory from "@/components/games/GameFactory";
 import Jyly from "@/model/rules/Jyly";
-import uuidv4 from "uuidv4";
+import { v4 as uuid } from "uuid";
 
-jest.mock("uuidv4", () => ({
-	uuid: jest.fn().mockReturnValue("someuuid")
+jest.mock("uuid", () => ({
+	v4: jest.fn().mockReturnValue("someuuid")
 }));
 
 describe("GameFactory.ts", () => {
@@ -15,7 +15,7 @@ describe("GameFactory.ts", () => {
 	
 	it("Creates UUID for id", () => {
 		let game: Game = GameFactory.create(Jyly);
-		expect(uuidv4.uuid).toBeCalled();
+		expect(uuid).toBeCalled();
 		expect(game.id).toBe("someuuid");
 	});
 	

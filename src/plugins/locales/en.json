@@ -37,5 +37,8 @@
 	"startGame": "Start",
 	"close": "Close",
 	"customRuleset": "Custom {base}",
-	"addPlayers": "Add players"
+	"addPlayers": "Add players",
+	"totalRounds": "Total rounds",
+	"averageScore": "Average score",
+	"bestScore": "Best score"
 }

@@ -5,13 +5,8 @@
 				{{$store.getters.playerName(player)}}
 			</div>
 			<div class="display-4 text-center">{{player.score}}</div>
-			<div class="result__row-container pa-2">
-				<template v-for="(result, idx) in calculatePlayerResults(player.id)">
-					<span class="result__distance font-weight-bold" :key="idx + '-distance'">{{idx}}m: </span>
-					<span class="result__hits" :key="idx + '-hits'">{{result.hits}} / {{result.total}}</span>
-					<Bar :at="percent(result)" :total="result.total" :key="idx + '-bar'"/>
-					<span class="percent" :key="idx + '-percent'">{{percent(result)}}%</span>
-				</template>
+			<div class="pa-2">
+				<DistanceResults :rules="rules" :rounds="playerRounds(player.id)" :game="game"/>
 			</div>
 			<v-expansion-panels>
 				<v-expansion-panel v-model="roundsList[idx]">
@@ -37,19 +32,19 @@
 </template>
 
 <script lang="ts">
-	import Vue from "vue";
+	import Vue, {PropType} from "vue";
 	import Game from "@/model/types/Game";
-	import Bar from "@/components/results/Bar.vue";
 	import Rules from "@/model/rules/Rules";
 	import Rule from "@/model/types/Rule";
 	import {DELETE_ROUND} from "@/store/action-types";
 	import Round from "@/model/types/Round";
 	import {routeNames} from "@/plugins/routeNames";
+	import DistanceResults from "@/components/results/DistanceResults.vue";
 
 	export default Vue.extend({
 		props: {
 			game: {
-				type: Object as () => Game,
+				type: Object as PropType<Game>,
 				required: true
 			}
 		},
@@ -71,30 +66,8 @@
 			}
 		},
 		methods: {
-			initializeResults(distances: number[]): {[id: number]: {total: number, hits: number}} {
-				const result: {[id: number]: {total: number, hits: number}} = {};
-				distances.forEach(function(distance) {
-					result[distance] = {total: 0, hits: 0};
-				});
-				return result;
-			},
-			calculatePlayerResults(playerId: number): {[id: number]: {total: number, hits: number}} {
-				const results = this.initializeResults(this.rules.distances(this.game));
-				const playerRounds = this.playerRounds(playerId);
-				for (let i in playerRounds) {
-					const round = playerRounds[i];
-					results[round.distance] = {
-						total: results[round.distance].total + this.discs,
-						hits: results[round.distance].hits + round.hits,
-					};
-				}
-				return results;
-			},
 			playerRounds(playerId: number): Round[] {
 				return this.game.rounds.filter(round => round.playerId === playerId);
-			},
-			percent(result: {total: number, hits: number}): number {
-				return result.total === 0 ? 0 : Math.round(result.hits*100/result.total);
 			},
 			back(): void {
 				if (this.$router.currentRoute.path.includes("games")) {
@@ -121,18 +94,12 @@
 			}
 		},
 		components: {
-			Bar
+			DistanceResults
 		}
 	});
 </script>
 
 <style scoped>
-	.result__row-container {
-		display: grid;
-		grid-template-columns: max-content max-content 1fr max-content;
-		width: 100%;
-		grid-gap: 1rem;
-	}
 	.results__actions {
 		display: flex;
 		flex-direction: row;

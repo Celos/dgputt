@@ -8,8 +8,8 @@ const discs = 5;
 const Fifty: Rule = {
 	id: "fifty",
 	rounds: rounds,
-	distances: (game: Game) => {
-		return game.ruleModifiers && game.ruleModifiers.start ? [game.ruleModifiers.start] : [start];
+	distances: (game?: Game) => {
+		return game && game.ruleModifiers && game.ruleModifiers.start ? [game.ruleModifiers.start] : [start];
 	},
 	start: start,
 	discs: discs,

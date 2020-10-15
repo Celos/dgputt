@@ -7,9 +7,9 @@ const discs = 3;
 const Ladder: Rule = {
 	id: "ladder",
 	rounds: undefined,
-	distances: (game: Game) => {
+	distances: (game?: Game) => {
 		const distances: number[] = [];
-		const startingDistance = game.ruleModifiers && game.ruleModifiers.start ? game.ruleModifiers.start : start;
+		const startingDistance = game && game.ruleModifiers && game.ruleModifiers.start ? game.ruleModifiers.start : start;
 		const end = startingDistance + 5;
 		for (let i = startingDistance; i <= end; i++) {
 			distances.push(i);

@@ -15,13 +15,13 @@
 </template>
 
 <script lang="ts">
-	import Vue from "vue";
+	import Vue, {PropType} from "vue";
 	import Player from "../../model/types/Player";
 
 	export default Vue.extend({
 		props: {
 			players: {
-				type: Array as () => Player[],
+				type: Array as PropType<Player[]>,
 				required: true
 			}
 		}

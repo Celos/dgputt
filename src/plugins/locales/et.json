@@ -37,5 +37,8 @@
 	"startGame": "Alusta",
 	"close": "Sulge",
 	"customRuleset": "Kohandatud {base}",
-	"addPlayers": "Lisa mängijaid"
+	"addPlayers": "Lisa mängijaid",
+	"totalRounds": "Mänge kokku",
+	"averageScore": "Keskmine tulemus",
+	"bestScore": "Parim tulemus"
 }

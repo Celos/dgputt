@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-	import Vue from "vue";
+	import Vue, {PropType} from "vue";
 	import Player from "@/model/types/Player";
 	import Game from "@/model/types/Game";
 	import Rule from "@/model/types/Rule";
@@ -24,11 +24,11 @@
 				required: true
 			},
 			game: {
-				type: Object as () => Game,
+				type: Object as PropType<Game>,
 				required: true
 			},
 			player: {
-				type: Object as () => Player,
+				type: Object as PropType<Player>,
 				required: true
 			}
 		},
@@ -69,9 +69,5 @@
 <style scoped>
 	.player-score.player-score {
 		font-size: 10rem !important;
-	}
-	.row {
-		display: flex;
-		flex-direction: row;
 	}
 </style>

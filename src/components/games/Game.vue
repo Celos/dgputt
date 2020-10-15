@@ -20,7 +20,7 @@
 	import ScoreDisplay from "./ScoreDisplay.vue";
 	import ScoreInput from "./ScoreInput.vue";
 
-	import Vue from "vue";
+	import Vue, {PropType} from "vue";
 	import Game from "@/model/types/Game";
 	import {ADD_ROUND, DELETE_GAME, DELETE_ROUND} from "@/store/action-types";
 	import Round from "@/model/types/Round";
@@ -33,7 +33,7 @@
 		name: "Game",
 		props: {
 			game: {
-				type: Object as () => Game,
+				type: Object as PropType<Game>,
 				required: true
 			}
 		},

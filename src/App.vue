@@ -1,19 +1,19 @@
 <template>
 	<v-app>
-		<v-navigation-drawer absolute temporary right v-model="drawerOpen" app>
+		<v-navigation-drawer fixed temporary right v-model="drawerOpen" app>
 			<Settings/>
 		</v-navigation-drawer>
-		<v-app-bar app>
-			<v-tabs grow>
+		<v-app-bar app :color="appbarColor" dark>
+			<v-tabs grow dark color="white">
 				<v-tab :to="{name: 'games'}">{{ $t("games") }}</v-tab>
 				<v-tab :to="{name: 'stats'}">{{ $t("stats") }}</v-tab>
 				<v-tab :to="{name: 'history'}">{{ $t("history") }}</v-tab>
 			</v-tabs>
 			<v-app-bar-nav-icon @click.stop="drawerOpen = !drawerOpen"/>
 		</v-app-bar>
-		<v-content class="ma-2">
+		<v-main class="ma-2">
 			<router-view/>
-		</v-content>
+		</v-main>
 	</v-app>
 </template>
 
@@ -28,6 +28,11 @@
 		}),
 		components: {
 			Settings
+		},
+		computed: {
+			appbarColor: function (): string {
+				return this.$vuetify.theme.dark ? "blue-grey darken-2" : "indigo";
+			}
 		}
 	});
 </script>

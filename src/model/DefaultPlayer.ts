@@ -16,3 +16,5 @@ export default class DefaultPlayer implements Player {
 		this.userId = userId;
 	}
 }
+
+export const PRIMARY_PLAYER = new DefaultPlayer(1, true);
