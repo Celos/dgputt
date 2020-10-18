@@ -5,13 +5,13 @@ import User from "@/model/types/User";
 import Rules from "@/model/rules/Rules";
 import CustomRuleset from "@/model/types/CustomRuleset";
 import Round from "@/model/types/Round";
-import {PRIMARY_PLAYER} from "@/model/DefaultPlayer";
+import {PRIMARY_PLAYER_ID} from "@/model/DefaultPlayer";
 import Rule from "@/model/types/Rule";
 
 export default {
 	allPrimaryPlayerRounds: (state: State, getters: any) => (rules?: Rule): Round[] => {
 		const games: Game[] = rules ? getters.categorizedByRules[rules.id] : state.games;
-		return games.flatMap(game => game.rounds.filter(round => round.playerId === PRIMARY_PLAYER.id));
+		return games.flatMap(game => game.rounds.filter(round => round.playerId === PRIMARY_PLAYER_ID));
 	},
 	byId: (state: State) => (id: string): Game | undefined => {
 		return state.games.find(game => game.id === id);

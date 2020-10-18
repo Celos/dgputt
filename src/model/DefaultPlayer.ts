@@ -17,4 +17,4 @@ export default class DefaultPlayer implements Player {
 	}
 }
 
-export const PRIMARY_PLAYER = new DefaultPlayer(1, true);
+export const PRIMARY_PLAYER_ID = 1;

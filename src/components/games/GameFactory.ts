@@ -1,7 +1,7 @@
 import Rule from "../../model/types/Rule";
 import Game from "../../model/types/Game";
-import { v4 as uuid } from "uuid";
-import {PRIMARY_PLAYER} from "@/model/DefaultPlayer";
+import {v4 as uuid} from "uuid";
+import DefaultPlayer, {PRIMARY_PLAYER_ID} from "@/model/DefaultPlayer";
 
 export default class GameFactory {
 	
@@ -9,7 +9,7 @@ export default class GameFactory {
 		return {
 			id: uuid(),
 			ruleId: rules.id,
-			players: [PRIMARY_PLAYER],
+			players: [new DefaultPlayer(PRIMARY_PLAYER_ID, true)],
 			rounds: [],
 			completed: undefined
 		};
