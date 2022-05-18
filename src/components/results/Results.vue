@@ -74,13 +74,14 @@
 					this.$store.dispatch(DELETE_ROUND, {
 						game: this.game,
 						roundIdx: this.game.rounds.length - 1
-					}).then(() => this.$router.push({name: routeNames.game, params: {id: this.game.id}}));
+					}).then(() => this.$router.push({name: routeNames.game, params: {id: this.game.id}}))
+						.catch(() => {});
 				} else {
-					this.$router.push({name: routeNames.history});
+					this.$router.push({name: routeNames.history}).catch(() => {});
 				}
 			},
 			newGame(): void {
-				this.$router.push({name: routeNames.games});
+				this.$router.push({name: routeNames.games}).catch(() => {});
 			},
 			roundColor(round: Round): string {
 				const percent = Math.round(round.hits * 100 / this.discs);

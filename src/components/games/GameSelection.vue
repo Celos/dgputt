@@ -8,7 +8,7 @@
 						{{$t(rule.id)}}
 					</v-btn>
 					<div :key="rule.id + '-desc'" class="game-selection__description">
-						{{$t(rule.id + ".description")}}
+						{{describe(rule.id)}}
 					</div>
 					<div :key="`${rule.id}-actions`"></div>
 				</template>
@@ -20,7 +20,7 @@
 							{{$t("customRuleset", {base: $t(customRuleset.ruleId)})}}
 						</v-btn>
 						<div :key="`${customRuleset.id}-desc`" class="game-selection__description">
-							{{$t(customRuleset.ruleId + ".description")}}
+							{{describe(customRuleset.ruleId, customRuleset.modifiers)}}
 						</div>
 						<div :key="`${customRuleset.id}-actions`" class="game-selection__custom-actions">
 							<v-btn color="error" @click.stop.prevent="deleteCustomRuleset(customRuleset.id)">{{$t("delete")}}</v-btn>
@@ -151,7 +151,8 @@
 						this.players.forEach(player => game.players.push(player));
 					}
 					this.$store.dispatch(ADD_GAME, game)
-						.then(() => this.$router.push({name: routeNames.game, params: {"id": game.id}}));
+						.then(() => this.$router.push({name: routeNames.game, params: {"id": game.id}}))
+						.catch(() => {});
 				}
 			},
 			startCustomGame(customRulesetId?: string): void {
@@ -224,6 +225,14 @@
 			},
 			deleteCustomRuleset(customRulesetId: string) {
 				this.$store.dispatch(REMOVE_CUSTOM_RULESET, customRulesetId);
+			},
+			describe(ruleId: string, modifiers?: RuleModifiers) {
+				return this.$t(ruleId + ".description", {
+					minDistance: Math.min(...Rules.byId(ruleId).distances(modifiers)),
+					maxDistance: Math.max(...Rules.byId(ruleId).distances(modifiers)),
+					discs: modifiers && modifiers.discs ? modifiers.discs : Rules.byId(ruleId).discs,
+					rounds: modifiers && modifiers.rounds ? modifiers.rounds : Rules.byId(ruleId).rounds
+				});
 			}
 		},
 		watch: {
@@ -267,5 +276,6 @@
 	}
 	.btn--fab-like {
 		bottom: -22px;
+		z-index: 1;
 	}
 </style>

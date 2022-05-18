@@ -1,10 +1,11 @@
 import Game from "@/model/types/Game";
+import RuleModifiers from "@/model/types/RuleModifiers";
 
 export default interface Rule {
 
 	id: string;
 	rounds?: number;
-	distances: (game?: Game) => number[];
+	distances: (modifiers?: RuleModifiers) => number[];
 	start: number;
 	discs: number;
 	color: string;

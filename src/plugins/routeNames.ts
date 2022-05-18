@@ -3,5 +3,6 @@ export const routeNames = {
 	game: "game",
 	results: "results",
 	stats: "stats",
-	history: "history"
+	history: "history",
+	deleteGame: "deleteGame"
 };

@@ -40,7 +40,7 @@
 				return result;
 			},
 			calculateResults(): { [id: number]: { total: number, hits: number } } {
-				const results = this.initializeResults(this.rules.distances(this.game));
+				const results = this.initializeResults(this.rules.distances(this.game ? this.game.ruleModifiers : undefined));
 				for (let i in this.rounds) {
 					const round = this.rounds[i];
 					results[round.distance] = {

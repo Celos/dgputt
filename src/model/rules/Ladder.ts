@@ -1,5 +1,6 @@
 import Rule from "@/model/types/Rule";
 import Game from "@/model/types/Game";
+import RuleModifiers from "@/model/types/RuleModifiers";
 
 const start = 5;
 const discs = 3;
@@ -7,9 +8,9 @@ const discs = 3;
 const Ladder: Rule = {
 	id: "ladder",
 	rounds: undefined,
-	distances: (game?: Game) => {
+	distances: (modifiers?: RuleModifiers) => {
 		const distances: number[] = [];
-		const startingDistance = game && game.ruleModifiers && game.ruleModifiers.start ? game.ruleModifiers.start : start;
+		const startingDistance = modifiers && modifiers.start ? modifiers.start : start;
 		const end = startingDistance + 5;
 		for (let i = startingDistance; i <= end; i++) {
 			distances.push(i);

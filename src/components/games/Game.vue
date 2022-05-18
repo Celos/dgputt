@@ -17,19 +17,19 @@
 </template>
 
 <script lang="ts">
-	import ScoreDisplay from "./ScoreDisplay.vue";
-	import ScoreInput from "./ScoreInput.vue";
+import ScoreDisplay from "./ScoreDisplay.vue";
+import ScoreInput from "./ScoreInput.vue";
 
-	import Vue, {PropType} from "vue";
-	import Game from "@/model/types/Game";
-	import {ADD_ROUND, DELETE_GAME, DELETE_ROUND} from "@/store/action-types";
-	import Round from "@/model/types/Round";
-	import Rule from '@/model/types/Rule';
-	import Rules from '../../model/rules/Rules';
-	import Player from "@/model/types/Player";
-	import {routeNames} from "@/plugins/routeNames";
+import Vue, {PropType} from "vue";
+import Game from "@/model/types/Game";
+import {ADD_ROUND, DELETE_ROUND} from "@/store/action-types";
+import Round from "@/model/types/Round";
+import Rule from '@/model/types/Rule';
+import Rules from '../../model/rules/Rules';
+import Player from "@/model/types/Player";
+import {routeNames} from "@/plugins/routeNames";
 
-	export default Vue.extend({
+export default Vue.extend({
 		name: "Game",
 		props: {
 			game: {
@@ -90,7 +90,7 @@
 					round: round
 				}).then(() => {
 					if (this.game.completed) {
-						this.$router.push({path: "/games/result/" + this.game.id});
+						this.$router.push({path: "/games/result/" + this.game.id}).catch(() => {});
 					}
 				});
 			},
@@ -102,10 +102,7 @@
 				});
 			},
 			newGame(): void {
-				let id = this.game.id;
-				this.$store.dispatch(DELETE_GAME, id).then(() => {
-					this.$router.push({name: routeNames.games});
-				});
+				this.$router.push({name: routeNames.deleteGame, params: {"id": this.game.id}}).catch(() => {});
 			}
 		},
 		components: {

@@ -2,7 +2,7 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import GameSelectionView from "@/views/GameSelectionView.vue";
 import GameView from "@/views/GameView.vue";
-import {gameGuard, gamesGuard, resultGuard} from './router-guards';
+import {deleteGameGuard, gameGuard, gamesGuard, resultGuard} from './router-guards';
 import {routeNames} from "@/plugins/routeNames";
 
 Vue.use(VueRouter);
@@ -20,6 +20,12 @@ const routes = [
 		props: true,
 		component: GameView,
 		beforeEnter: gameGuard
+	},
+	{
+		path: "/games/delete/:id",
+		name: routeNames.deleteGame,
+		props: true,
+		beforeEnter: deleteGameGuard
 	},
 	{
 		path: "/stats",

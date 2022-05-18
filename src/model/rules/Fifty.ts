@@ -1,5 +1,6 @@
 import Rule from "@/model/types/Rule";
 import Game from '@/model/types/Game';
+import RuleModifiers from "@/model/types/RuleModifiers";
 
 const rounds = 10;
 const start = 5;
@@ -8,8 +9,8 @@ const discs = 5;
 const Fifty: Rule = {
 	id: "fifty",
 	rounds: rounds,
-	distances: (game?: Game) => {
-		return game && game.ruleModifiers && game.ruleModifiers.start ? [game.ruleModifiers.start] : [start];
+	distances: (modifiers?: RuleModifiers) => {
+		return modifiers && modifiers.start ? [modifiers.start] : [start];
 	},
 	start: start,
 	discs: discs,

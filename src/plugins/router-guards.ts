@@ -2,6 +2,7 @@ import {Route} from "vue-router";
 import Game from "@/model/types/Game";
 import store from "@/store/vuex";
 import {routeNames} from "@/plugins/routeNames";
+import {DELETE_GAME} from "@/store/action-types";
 
 export const gamesGuard = (to: Route, from: Route, next: any) => {
 	const active: Game | undefined = store.getters.active;
@@ -35,3 +36,9 @@ export const resultGuard = (to: Route, from: Route, next: any) => {
 		next();
 	}
 };
+
+export const deleteGameGuard = (to: Route, from: Route, next: any) => {
+	const gameId = to.params.id;
+	store.dispatch(DELETE_GAME, gameId).then(() => console.log("record deleted!"));
+	next({name: routeNames.games});
+}
