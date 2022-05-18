@@ -69,5 +69,6 @@
 	}
 	.scoring__inputs .scoring__btn {
 		height: 5rem;
+		min-width: 0;
 	}
 </style>

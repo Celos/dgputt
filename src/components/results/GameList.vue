@@ -9,7 +9,7 @@
 						<span class="grey--text middle caption game-result__completed ml-3" >{{dateString(game.completed)}}</span>
 					</div>
 					<div class="game-result__actions">
-						<v-btn color="error" @click.stop.prevent="deleteGame(game.id)">{{$t("delete")}}</v-btn>
+						<v-btn color="error" @click.stop.prevent="deleteGame(game.id)" icon :title="$t('delete')"><v-icon>mdi-delete</v-icon></v-btn>
 					</div>
 				</v-list-item>
 				<v-divider v-if="notLast(idx)" :key="game.id + '-div'"/>

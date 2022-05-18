@@ -12,6 +12,8 @@
 					</div>
 					<div :key="`${rule.id}-actions`"></div>
 				</template>
+			</v-card-text>
+			<v-card-text class="game-selection__container">
 				<template v-if="$store.getters.customRulesets.length">
 					<v-divider class="game-selection__section-divider"/>
 					<template v-for="customRuleset in $store.getters.customRulesets">
@@ -23,7 +25,7 @@
 							{{describe(customRuleset.ruleId, customRuleset.modifiers)}}
 						</div>
 						<div :key="`${customRuleset.id}-actions`" class="game-selection__custom-actions">
-							<v-btn color="error" @click.stop.prevent="deleteCustomRuleset(customRuleset.id)">{{$t("delete")}}</v-btn>
+							<v-btn color="error" @click.stop.prevent="deleteCustomRuleset(customRuleset.id)" icon :title="$t('delete')"><v-icon>mdi-delete</v-icon></v-btn>
 						</div>
 					</template>
 				</template>
@@ -250,16 +252,23 @@
 	});
 </script>
 
-<style scoped>
+<style>
 	.game-selection__container {
 		display: grid;
-		grid-template-columns: max-content 1fr max-content;
+		grid-template-columns: auto 1fr max-content;
 		grid-gap: 0.6rem;
 	}
 	.game-selection__container .game-selection__btn {
-		min-width: 5rem;
+		max-width: 5rem;
 		min-height: 5rem;
-		word-break: break-word;
+		min-width: 0;
+		word-wrap: break-word;
+		white-space: unset;
+		overflow: hidden;
+	}
+	.game-selection__container .game-selection__btn .v-btn__content {
+		flex: 1 1 auto;
+		min-width: 0;
 	}
 	.game-selection__description {
 		display: flex;
@@ -275,7 +284,7 @@
 		justify-content: center;
 	}
 	.btn--fab-like {
-		bottom: -22px;
+		bottom: -22px !important;
 		z-index: 1;
 	}
 </style>

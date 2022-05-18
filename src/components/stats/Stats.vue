@@ -22,7 +22,7 @@
 	import GameStats from "@/components/stats/GameStats.vue";
 	import Rule from "@/model/types/Rule";
 	import Rules from "@/model/rules/Rules";
-	import LineChart from "@/components/stats/LineChart";
+	import LineChart from "@/components/stats/LineChart.vue";
 
 	export default Vue.extend({
 		computed: {
