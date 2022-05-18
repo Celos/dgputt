@@ -7,6 +7,7 @@ export default {
 	mixins: [reactiveProp],
 	mounted() {
 		this.renderChart(this.chartData, {
+			bezierCurve: false,
 			scales: {
 				xAxes: [{
 					type: "time"
