@@ -1,16 +1,26 @@
 <template>
-	<Line :chart-data="chartData" :chart-options="chartOptions"/>
+	<LineChartGenerator :chart-data="chartData" :chart-options="opts"/>
 </template>
 
 <script>
-import {Line} from "vue-chartjs/legacy";
-import {Chart as ChartJS, Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement} from "chart.js";
+import "chartjs-adapter-date-fns";
+import {Line as LineChartGenerator} from "vue-chartjs/legacy";
+import {CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, Title, Tooltip, TimeScale} from "chart.js"
 
-ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
+ChartJS.register(
+	Title,
+	Tooltip,
+	Legend,
+	LineElement,
+	LinearScale,
+	CategoryScale,
+	PointElement,
+	TimeScale
+)
 
 export default {
 	name: "LineChart",
-	components: {Line},
+	components: {LineChartGenerator},
 	props: {
 		chartData: {
 			type: Object,
@@ -18,12 +28,12 @@ export default {
 		},
 	},
 	data: () => ({
-		chartOptions: {
+		opts: {
 			bezierCurve: false,
 			scales: {
-				xAxes: [{
+				x: {
 					type: "time"
-				}]
+				}
 			}
 		}
 	})
